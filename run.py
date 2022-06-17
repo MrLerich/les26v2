@@ -1,9 +1,13 @@
 from flask import Flask, render_template
-app = Flask(__name__)
+from bp_posts.views import bp_posts
 
-@app.route('/')
-def index():
-    return 'It works'
+app = Flask(__name__)
+app.register_blueprint(bp_posts)
+
+
+# @app.route('/')
+# def index():
+#     return 'It works'
 
 if __name__ == '__main__':
     app.run(debug=True)

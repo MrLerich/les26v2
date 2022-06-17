@@ -56,11 +56,34 @@ class TestPostDAO:
     #     post = post_dao.get_by_pk(pk)
     #     assert post.pk == pk, f'Не верный post.pk для для запрашиваемого поста с pk = {pk}'
 
-    #Функция получения постов по автору
+    #Функция получения постов по вхождению строки
 
-    def test_search
+    def test_search_in_content_types(self, post_dao):
+        posts = post_dao.search_by_content("ага")
+        posts = post_dao.get_all()
+        assert type(posts) == list, 'Неверный тип для вывода постов'
+        post = post_dao.get_all()[0]
+        assert type(post) == Post, 'Неверный тип для вывода одного поста'
 
+    def test_search_in_content_fields(self, post_dao):
+        posts = post_dao.search_by_content("ага")
+        post = post_dao.get_all()[0]
+        check_fields(post)
 
+    def test_search_in_content_not_found(self, post_dao):
+        posts = post_dao.search_by_content("100500100500")
+        assert posts == [], "Должен быть пустым для несуществующих в постах слов"
+
+    @pytest.mark.parametrize("s, expected_pks", [
+        ("Ага", {1}),
+        ("на", {1, 2, 3})
+    ])
+    def test_search_in_content_results(self, post_dao, s, expected_pks):
+        posts = post_dao.search_by_content(s)
+        pks = set([post.pk for post in posts])
+        assert pks == expected_pks, f"Не верный результат поиска по {s}"
+
+    ##Функция получения постов по автору
 
 
 
