@@ -28,7 +28,7 @@ def page_posts_single(pk: int):
     post: Post | None = post_dao.get_by_pk(pk)
     comments: list[Comment] = comment_dao.get_comments_by_post_pk(pk)
 
-    if post is None:
+    if post is None:                                    #если нет поста
         abort(404)
 
     return render_template("posts_single.html",
@@ -41,6 +41,9 @@ bp_posts.route("/users/<user_name>")
 def page_posts_by_user(user_name: str):
     '''Возвращает все посты пользователя'''
     posts: list[Post] = post_dao.get_by_poster(user_name)
+
+    if not posts:                                #если нет такого пользователя
+        abort(404, "Такого пользователя нет!")
 
     return render_template("posts_user-feed.html",
                            posts=posts,

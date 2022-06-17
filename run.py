@@ -14,7 +14,7 @@ app = create_and_config_app("config.py")
 
 @app.errorhandler(404)
 def page_error_404(error):
-    return "Такой страницы нет!", 404
+    return f"Такой страницы нет! {error}", 404
 
 
 @app.errorhandler(500)
