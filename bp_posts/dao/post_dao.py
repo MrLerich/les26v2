@@ -3,7 +3,7 @@
 import json
 from json import JSONDecodeError
 
-from post import Post
+from bp_posts.dao.post import Post
 from exceptions.data_exceptions import DataSourceError
 
 
@@ -13,7 +13,7 @@ class PostDAO:
     def __init__(self, path):
         self.path = path
 
-    def _load_data(self) -> list[dict]:
+    def _load_data(self):
         '''Загружает данные из JSON и возвращает список словарей'''
 
         try:
@@ -24,7 +24,7 @@ class PostDAO:
 
         return posts_data
 
-    def _load_posts(self) -> list:
+    def _load_posts(self):
         '''Возвращает список экземпляров Post'''
 
         posts_data = self._load_data()
@@ -32,14 +32,14 @@ class PostDAO:
 
         return list_of_posts
 
-    def get_all(self) -> list:
+    def get_all(self):
         '''Получает все посты'''
 
         posts = self._load_posts()
 
         return posts
 
-    def get_by_pk(self, pk: int) -> list:
+    def get_by_pk(self, pk: int):
         '''Получает пост по его pk'''
 
         if type(pk) != int:
@@ -53,7 +53,7 @@ class PostDAO:
         #         return post
         return post
 
-    def search_by_content(self, substring: str) -> list:
+    def search_by_content(self, substring: str):
         '''Ищет посты, по входящему в него контенту(substring)'''
 
         if type(substring) != str:
@@ -66,7 +66,7 @@ class PostDAO:
 
         return matching_posts
 
-    def get_by_poster(self, username: str) -> list:
+    def get_by_poster(self, username: str):
         '''Получает все посты пользователя'''
         if type(username) != str:
             raise TypeError('username должен быть стоковым значением')
@@ -79,10 +79,4 @@ class PostDAO:
 
         return matching_posts
 
-# pd = PostDAO('../../data/posts.json')
-# pp(pd._load_posts())
-# pp(pd._load_data())
-# pp(pd.get_all())
-# pp(pd.search_by_content('лампочка'))
-# pp(pd.get_by_pk(5))
-# pp(pd.get_by_poster('leo'))
+
