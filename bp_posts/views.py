@@ -1,8 +1,9 @@
-from flask import Flask, render_template, Blueprint
+from flask import Flask, render_template, Blueprint, request
 from werkzeug.exceptions import abort
 
 from bp_posts.dao.comment import Comment
 from bp_posts.dao.comment_dao import CommentDAO
+from bp_posts.dao.post import Post
 from bp_posts.dao.post_dao import PostDAO
 from config import DATA_PATH_POSTS, DATA_PATH_COMMENTS
 
@@ -36,11 +37,27 @@ def page_posts_single(pk: int):
                            comments_len=len(comments)
                            )
 
-bp_posts.route("/users/<username>")
-def page_posts_by_user(username: str):
-    posts = post_dao.get_by_poster(username)
+bp_posts.route("/users/<user_name>")
+def page_posts_by_user(user_name: str):
+    '''Возвращает все посты пользователя'''
+    posts: list[Post] = post_dao.get_by_poster(user_name)
 
     return render_template("posts_user-feed.html",
                            posts=posts,
-                           username=username
+                           user_name=user_name
+                           )
+
+bp_posts.route("/search/")
+def page_posts_search():
+    '''Возвращает результат поиска'''
+    query: str = request.args.get("s", "")
+    if query == "":
+        posts: list = []
+    else:
+        posts = post_dao.search_by_content(query)
+
+    return render_template("posts_search.html",
+                           posts=posts,
+                           query=query,
+                           posts_len=len(posts)
                            )

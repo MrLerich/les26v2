@@ -66,16 +66,16 @@ class PostDAO:
 
         return matching_posts
 
-    def get_by_poster(self, username: str):
+    def get_by_poster(self, user_name: str):
         '''Получает все посты пользователя'''
-        if type(username) != str:
+        if type(user_name) != str:
             raise TypeError('username должен быть стоковым значением')
 
-        username = username.lower()
+        user_name = user_name.lower()
 
         posts = self._load_posts()
 
-        matching_posts = [post for post in posts if post.poster_name.lower() == username]
+        matching_posts = [post for post in posts if post.poster_name.lower() == user_name]
 
         return matching_posts
 

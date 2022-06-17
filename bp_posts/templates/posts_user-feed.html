@@ -16,11 +16,9 @@
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
         </svg>
       </a>
-      <a href="/" class="header__logo-link">
-        <svg class="header__logo" width="142" height="26">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#skypro"></use>
-        </svg>
-      </a>
+      <h1  class="header__logo-link">
+        posts by {{ user_name }}
+      </h1>
     </div>
   </header>
   <main class="container">
@@ -38,7 +36,7 @@
         <a href="/posts/{{ post.pk}}" class="item__post-link">
           <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
-        <p class="item__descr">{{ post.content }}}</p>
+        <p class="item__descr">{{ post.content }}</p>
         <div class="item__post-info">
           <div class="item__counter">
             <img src="../../static/img/eye.png" alt="" class="item__counter-icon" width="26">
@@ -46,7 +44,7 @@
           </div>
         </div>
         <div class="item__post-bottom">
-          <a href="/bp_posts/templates/posts_post.html/post.html" class="item__btn-more">Подробнее</a>
+          <a href=" /posts_single.html" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
             <img src="../../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>
@@ -72,7 +70,7 @@
           </div>
         </div>
         <div class="item__post-bottom">
-          <a href="/bp_posts/templates/posts_single.html/post.html" class="item__btn-more">Подробнее</a>
+          <a href="/bp_posts/templates/posts_single.html" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
             <img src="../../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>
