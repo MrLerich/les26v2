@@ -51,7 +51,7 @@ bp_posts.route("/search/")
 def page_posts_search():
     '''Возвращает результат поиска'''
     query: str = request.args.get("s", "")
-    if query == "":
+    if query == "":                                 #в случае пустого запроса - выводим пустой лист
         posts: list = []
     else:
         posts = post_dao.search_by_content(query)
