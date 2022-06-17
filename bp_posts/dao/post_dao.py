@@ -47,10 +47,10 @@ class PostDAO:
 
         posts = self._load_posts()
 
-        post = [post for post in posts if post.pk == pk]
-        # for post in posts:
-        #     if post.pk == pk:
-        #         return post
+        # post = [post for post in posts if post.pk == pk] #возвращает list, а нужно Post
+        for post in posts:
+            if post.pk == pk:
+                return post
         return post
 
     def search_by_content(self, substring: str):

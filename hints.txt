@@ -1,0 +1,44 @@
+# Проверкуа для post_dao
+# pd = PostDAO('../../data/posts.json')
+# pp(pd._load_posts())
+# pp(pd._load_data())
+# pp(pd.get_all())
+# pp(pd.search_by_content('лампочка'))
+# pp(pd.get_by_pk(5))
+# pp(pd.get_by_poster('leo'))
+#
+#
+# {% for post in posts %}
+#       <div class="items__item item">
+#         <div class="item__top">
+#           <a href="/users/{{ post.poster_name }}" class="item__head">
+#             <div class="item__ava-wrap">
+#               <img src="{{ post.poster_avatar }}" alt="" class="item__ava" width="47">
+#             </div>
+#             <span class="item__username">{{ post.poster_name }}</span>
+#           </a>
+#         </div>
+#         <a href="/posts/{{ post.pk}}" class="item__post-link">
+#           <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
+#         </a>
+#         <p class="item__descr">{{ post.content }}}</p>
+#         <div class="item__post-info">
+#           <div class="item__counter">
+#             <img src="../../static/img/eye.png" alt="" class="item__counter-icon" width="26">
+#             <span class="item__counter-text">{{ post.views_count }}</span>
+#           </div>
+#         </div>
+#         <div class="item__post-bottom">
+#           <a href="/bp_posts/templates/posts_post.html/post.html" class="item__btn-more">Подробнее</a>
+#           <button type="button" class="item__bookmark-btn">
+#             <img src="../../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+#           </button>
+#         </div>
+#       </div>
+#       {% endfor %}
+#
+#
+# #проверка для comment_dao
+# cd = CommentDAO('../../data/comments.json')
+# print(cd._load_comments())
+# print(cd.get_comments_by_post_pk(1))
