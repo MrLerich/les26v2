@@ -17,7 +17,14 @@ class TestApi:
 
     def test_all_posts_has_correct_stratus(self,app_instance):
         result = app_instance.get("/api/posts", follow_redirects=True)
-        assert result.status_code == 200
+        assert result.status_code == 200, "Нерпавильный "
+
+    def test_all_post_has_correct_keys(self, app_instance):
+        result = app_instance.get("/api/posts", follow_redirects=True)
+        list_of_posts = result.get_json()
+
+        for post in list_of_posts:
+            assert post.keys() == self.post_keys, "Неправильные ключи у полученного словаря!"
 
         #single_post
     def test_single_post_has_correct_stratus(self,app_instance):
