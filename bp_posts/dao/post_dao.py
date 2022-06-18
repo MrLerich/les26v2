@@ -39,7 +39,7 @@ class PostDAO:
 
         return posts
 
-    def get_by_pk(self, pk: int):
+    def get_by_pk(self, pk: int) -> list[Post]:
         '''Получает пост по его pk'''
 
         if type(pk) != int:
@@ -51,7 +51,7 @@ class PostDAO:
         for post in posts:
             if post.pk == pk:
                 return post
-        return post
+
 
     def search_by_content(self, substring: str):
         '''Ищет посты, по входящему в него контенту(substring)'''
