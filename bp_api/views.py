@@ -1,5 +1,5 @@
 import posts as posts
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, abort
 from bp_posts.dao.comment import Comment
 from bp_posts.dao.comment_dao import CommentDAO
 from bp_posts.dao.post import Post
@@ -30,5 +30,11 @@ def api_post_all():
 def api_post_single(pk: int):
     """"Endpoint Возвращает один  конкретный пост"""
     post: Post | None = post_dao.get_by_pk(pk)
+    if post is None:
+        abort(404)
     return jsonify(post.as_dict()), 200
 
+
+@bp_api.errorhandler(404)
+def api_error_404(error):
+    return jsonify({"error": str(error)}), 404
