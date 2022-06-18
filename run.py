@@ -7,6 +7,7 @@ from exceptions.data_exceptions import DataSourceError
 import config_logger
 
 
+
 def create_and_config_app(config_path):
 
     app = Flask(__name__)
@@ -15,6 +16,8 @@ def create_and_config_app(config_path):
     app.register_blueprint(bp_api, url_prefix="/api")   #все что начинается api будет обрабатываться
     app.config.from_pyfile(config_path)
     config_logger.config(app)
+    app.config['JSON_AS_ASCII'] = False             # кодировка проти в аляберды
+    app.config['JSON_SORT_KEYS'] = False            # против сортировки
 
     return app
 

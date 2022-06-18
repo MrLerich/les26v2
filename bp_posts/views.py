@@ -39,7 +39,7 @@ def page_posts_single(pk: int):
                            comments_len=len(comments)
                            )
 
-bp_posts.route("/users/<user_name>")
+@bp_posts.route("/users/<user_name>")
 def page_posts_by_user(user_name: str):
     '''Возвращает все посты пользователя'''
     posts: list[Post] = post_dao.get_by_poster(user_name)
@@ -52,7 +52,7 @@ def page_posts_by_user(user_name: str):
                            user_name=user_name
                            )
 
-bp_posts.route("/search/")
+@bp_posts.route("/search/")
 def page_posts_search():
     '''Возвращает результат поиска'''
     query: str = request.args.get("s", "")

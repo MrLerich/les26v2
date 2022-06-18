@@ -17,7 +17,7 @@ class TestApi:
         return test_client
 
 
-    def test_all_posts_has_correct_stratus(self,app_instance):
+    def test_all_posts_has_correct_stratus(self, app_instance):
         result = app_instance.get("/api/posts", follow_redirects=True)
         assert result.status_code == 200, "Нерпавильный "
 
@@ -29,21 +29,21 @@ class TestApi:
             assert post.keys() == self.post_keys, "Неправильные ключи у полученного словаря!"
 
         #single_post
-    def test_single_post_has_correct_stratus(self,app_instance):
+    def test_single_post_has_correct_stratus(self, app_instance):
         result = app_instance.get("/api/posts/1", follow_redirects=True)
         assert result.status_code == 200
 
-    def test_single_post_non_existent404(self,app_instance):
+    def test_single_post_non_existent404(self, app_instance):
         result = app_instance.get("/api/posts/777", follow_redirects=True)
         assert result.status_code == 404
 
-    def test_single_post_has_correct_keys(self,app_instance):
+    def test_single_post_has_correct_keys(self, app_instance):
         result = app_instance.get("/api/posts/1", follow_redirects=True)
         post = result.get_json()
         post_keys = set(post.keys())
         assert post_keys == self.post_keys
 
-    @pytest.mark.parametrize("pk",[(1),(2),(3),(4)])
+    @pytest.mark.parametrize("pk", [(1),(2),(3),(4)])
     def test_single_post_has_correct_data(self, app_instance, pk):
         result = app_instance.get(f"/api/posts/{pk}", follow_redirects=True)
         post = result.get_json()
