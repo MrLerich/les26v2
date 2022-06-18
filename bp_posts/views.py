@@ -12,6 +12,7 @@ from config import DATA_PATH_POSTS, DATA_PATH_COMMENTS
 bp_posts = Blueprint("bp_posts", __name__, template_folder="templates")
 
 ###Создаем объекты доступа к данным из config
+
 post_dao = PostDAO(DATA_PATH_POSTS)
 comment_dao = CommentDAO(DATA_PATH_COMMENTS)
 

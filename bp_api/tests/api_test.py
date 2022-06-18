@@ -1,3 +1,4 @@
+import os
 import pytest
 import run
 
@@ -10,7 +11,8 @@ class TestApi:
     @pytest.fixture
     def app_instance(self):
         app = run.app
-        #app.config.from_pyfile("testing.py")  #если хотим заменить какие-то данные при тестах удобно
+        #app.config.from_pyfile("testing.py")                                               #если хотим заменить какие-то данные при тестах удобно
+        app.config["DATA_PATH_POSTS"] = os.path.join("bp_posts", "tests", "post_mock")      #тащим данные из mock в тестах bp_posts
         test_client = app.test_client()
         return test_client
 
@@ -40,5 +42,12 @@ class TestApi:
         post = result.get_json()
         post_keys = set(post.keys())
         assert post_keys == self.post_keys
+
+    @pytest.mark.parametrize("pk",[(1),(2),(3),(4)])
+    def test_single_post_has_correct_data(self, app_instance, pk):
+        result = app_instance.get(f"/api/posts/{pk}", follow_redirects=True)
+        post = result.get_json()
+        assert post["pk"] == pk, f"Неправильный pk в запросе поста {pk}"
+
 
 
