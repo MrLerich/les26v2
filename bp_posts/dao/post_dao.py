@@ -24,7 +24,7 @@ class PostDAO:
 
         return posts_data
 
-    def _load_posts(self):
+    def _load_posts(self) -> list[Post]:
         '''Возвращает список экземпляров Post'''
 
         posts_data = self._load_data()
@@ -32,14 +32,14 @@ class PostDAO:
 
         return list_of_posts
 
-    def get_all(self):
+    def get_all(self) -> list[Post]:
         '''Получает все посты'''
 
         posts = self._load_posts()
 
         return posts
 
-    def get_by_pk(self, pk: int) -> list[Post]:
+    def get_by_pk(self, pk: int) -> Post:
         '''Получает пост по его pk'''
 
         if type(pk) != int:
@@ -52,31 +52,28 @@ class PostDAO:
             if post.pk == pk:
                 return post
 
-
-    def search_by_content(self, substring: str):
+    def search_by_content(self, substring: str) -> list[Post]:
         '''Ищет посты, по входящему в него контенту(substring)'''
 
         if type(substring) != str:
             raise TypeError('substring должен быть стоковым значением')
 
-        substring = substring.lower()
+        substring: str = substring.lower()
 
         posts = self._load_posts()
         matching_posts = [post for post in posts if substring in post.content.lower()]
 
         return matching_posts
 
-    def get_by_poster(self, user_name: str):
+    def get_by_poster(self, user_name: str) -> list[Post]:
         '''Получает все посты пользователя'''
         if type(user_name) != str:
             raise TypeError('username должен быть стоковым значением')
 
-        user_name = user_name.lower()
+        user_name: str = user_name.lower()
 
         posts = self._load_posts()
 
         matching_posts = [post for post in posts if post.poster_name.lower() == user_name]
 
         return matching_posts
-
-

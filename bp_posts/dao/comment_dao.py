@@ -7,7 +7,7 @@ from bp_posts.dao.comment import Comment
 
 
 class CommentDAO:
-
+    '''Менеджер абстракции комментариев'''
     def __init__(self, path):
         self.path = path
 
@@ -22,14 +22,14 @@ class CommentDAO:
 
         return posts_data
 
-    def _load_comments(self):
-        '''Возращает список элементов Comment'''
+    def _load_comments(self) -> list[Comment]:
+        ''' Возращает список элементов Comment '''
 
         comments_data = self._load_data()
         comments = [Comment(**comment_data) for comment_data in comments_data]
         return comments
 
-    def get_comments_by_post_pk(self, post_pk):
+    def get_comments_by_post_pk(self, post_pk) -> list[Comment]:
         '''  Получает все комментарии к посту по его post_pk '''
         comments = self._load_comments()
 

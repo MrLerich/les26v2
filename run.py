@@ -7,19 +7,19 @@ from exceptions.data_exceptions import DataSourceError
 import config_logger
 
 
-
 def create_and_config_app(config_path):
-
+    """Создание и конфиги нашего приложения"""
     app = Flask(__name__)
 
     app.register_blueprint(bp_posts)
-    app.register_blueprint(bp_api, url_prefix="/api")   #все что начинается api будет обрабатываться
+    app.register_blueprint(bp_api, url_prefix="/api")  # все что начинается api будет обрабатываться
     app.config.from_pyfile(config_path)
     config_logger.config(app)
-    app.config['JSON_AS_ASCII'] = False             # кодировка проти в аляберды
-    app.config['JSON_SORT_KEYS'] = False            # против сортировки
+    app.config['JSON_AS_ASCII'] = False  # кодировка проти в аляберды
+    app.config['JSON_SORT_KEYS'] = False  # против сортировки
 
     return app
+
 
 app = create_and_config_app("config.py")
 
@@ -37,6 +37,7 @@ def page_error_500(error):
 @app.errorhandler(DataSourceError)
 def page_error_data_source_error(error):
     return f"Ошибка, связанная с данными: {error}", 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
