@@ -32,13 +32,19 @@ def api_post_all():
 def api_post_single(pk: int):
     """"Endpoint Возвращает один  конкретный пост"""
     post: Post | None = post_dao.get_by_pk(pk)
+
     if post is None:
+        api_logger.debug(f"Запрошен несуществующий пост {pk}")
         abort(404)
+
+    api_logger.debug(f"Запрошен пост {pk}")
+
     return jsonify(post.as_dict()), 200
 
 
 @bp_api.errorhandler(404)
 def api_error_404(error):
+    api_logger.debug(f"Ошибочка вышла {error}")
     return jsonify({"error": str(error)}), 404
 
 

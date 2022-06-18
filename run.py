@@ -1,6 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask
 
-import config_logger
 from bp_api.views import bp_api
 from bp_posts.views import bp_posts
 from exceptions.data_exceptions import DataSourceError
