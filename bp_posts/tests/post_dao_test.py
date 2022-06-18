@@ -15,9 +15,9 @@ class TestPostDAO:
 
     @pytest.fixture
     def post_dao(self):
-        post_dao_instance = PostDAO('./bp_posts/tests/post_mock.json')
+        post_dao_instance = PostDAO("./bp_posts/tests/post_mock.json")
         return post_dao_instance
-
+    ###Функция получения всех
     def test_get_all_types(self, post_dao):
         posts = post_dao.get_all()
         assert type(posts) == list, 'Неверный тип для вывода постов'
