@@ -1,3 +1,4 @@
+import posts as posts
 from flask import Blueprint, jsonify
 from bp_posts.dao.comment import Comment
 from bp_posts.dao.comment_dao import CommentDAO
@@ -21,14 +22,13 @@ def api_doc():
 @bp_api.route("/posts/")
 def api_post_all():
     """"Endpoint Будет возвращать все посты"""
-    all_posts =post_dao.get_all()
-    return jsonify(all_posts)
+    all_posts: list[Post] = post_dao.get_all()
+    all_posts_as_dicts: list[dict] = [post.as_dict() for post in all_posts]
+    return jsonify(all_posts_as_dicts), 200
 
 @bp_api.route("/posts/<int:pk>")
 def api_post_single(pk: int):
     """"Endpoint Возвращает один  конкретный пост"""
     post: Post | None = post_dao.get_by_pk(pk)
-    return jsonify(post)
+    return jsonify(post.as_dict()), 200
 
-@bp_api.route("")
-def api_comment_post()
