@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, abort
+import logging
 from bp_posts.dao.comment import Comment
 from bp_posts.dao.comment_dao import CommentDAO
 from bp_posts.dao.post import Post
@@ -13,12 +14,17 @@ bp_api = Blueprint("bp_api", __name__)
 post_dao = PostDAO(DATA_PATH_POSTS)
 comment_dao = CommentDAO(DATA_PATH_COMMENTS)
 
+api_logger = logging.getLogger("api_logger")
+
 
 @bp_api.route("/posts/")
 def api_post_all():
     """"Endpoint Будет возвращать все посты"""
     all_posts: list[Post] = post_dao.get_all()
     all_posts_as_dicts: list[dict] = [post.as_dict() for post in all_posts]
+
+    api_logger.debug("Запрошены все посты")
+
     return jsonify(all_posts_as_dicts), 200
 
 

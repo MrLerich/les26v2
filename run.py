@@ -1,8 +1,11 @@
 from flask import Flask, render_template
 
+import config_logger
 from bp_api.views import bp_api
 from bp_posts.views import bp_posts
 from exceptions.data_exceptions import DataSourceError
+
+import config_logger
 
 
 def create_and_config_app(config_path):
@@ -11,8 +14,9 @@ def create_and_config_app(config_path):
 
     app.register_blueprint(bp_posts)
     app.register_blueprint(bp_api, url_prefix="/api")   #все что начинается api будет обрабатываться
-
     app.config.from_pyfile(config_path)
+    config_logger.config(app)
+
     return app
 
 app = create_and_config_app("config.py")
