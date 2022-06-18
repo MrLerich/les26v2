@@ -1,4 +1,3 @@
-import posts as posts
 from flask import Blueprint, jsonify, abort
 from bp_posts.dao.comment import Comment
 from bp_posts.dao.comment_dao import CommentDAO
@@ -15,16 +14,13 @@ post_dao = PostDAO(DATA_PATH_POSTS)
 comment_dao = CommentDAO(DATA_PATH_COMMENTS)
 
 
-@bp_api.route("/")
-def api_doc():
-    return "по / в api должно лежать что-то типа документации, for frontend: /api/posts  /api/posts/pk"
-
 @bp_api.route("/posts/")
 def api_post_all():
     """"Endpoint Будет возвращать все посты"""
     all_posts: list[Post] = post_dao.get_all()
     all_posts_as_dicts: list[dict] = [post.as_dict() for post in all_posts]
     return jsonify(all_posts_as_dicts), 200
+
 
 @bp_api.route("/posts/<int:pk>")
 def api_post_single(pk: int):
@@ -38,3 +34,8 @@ def api_post_single(pk: int):
 @bp_api.errorhandler(404)
 def api_error_404(error):
     return jsonify({"error": str(error)}), 404
+
+
+@bp_api.route("/")
+def api_doc():
+    return "по / в api должно лежать что-то типа документации, for frontend: /api/posts  /api/posts/pk"
