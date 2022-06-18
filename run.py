@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+
+from bp_api.views import bp_api
 from bp_posts.views import bp_posts
 from exceptions.data_exceptions import DataSourceError
 
@@ -6,9 +8,13 @@ from exceptions.data_exceptions import DataSourceError
 def create_and_config_app(config_path):
 
     app = Flask(__name__)
+
     app.register_blueprint(bp_posts)
+    app.register_blueprint(bp_api, url_prefix="/api")   #все что начинается api будет обрабатываться
+
     app.config.from_pyfile(config_path)
     return app
+
 app = create_and_config_app("config.py")
 
 

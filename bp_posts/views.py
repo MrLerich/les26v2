@@ -1,10 +1,11 @@
-from flask import Flask, render_template, Blueprint, request
+from flask import render_template, Blueprint, request
 from werkzeug.exceptions import abort
 
 from bp_posts.dao.comment import Comment
 from bp_posts.dao.comment_dao import CommentDAO
 from bp_posts.dao.post import Post
 from bp_posts.dao.post_dao import PostDAO
+
 from config import DATA_PATH_POSTS, DATA_PATH_COMMENTS
 
 ###Создаем blueprint
