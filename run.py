@@ -20,8 +20,8 @@ def create_and_config_app(config_path):
 
     return app
 
-
 app = create_and_config_app("config.py")
+
 
 
 @app.errorhandler(404)
