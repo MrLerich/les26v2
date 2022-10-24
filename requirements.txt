@@ -25,3 +25,4 @@ test-client==0.1
 tomli==2.0.1
 urllib3==1.26.9
 Werkzeug==2.2.2
+gunicorn==20.1.0
