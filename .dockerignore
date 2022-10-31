@@ -1,5 +1,5 @@
 venv/
-__pycashe__/
+__pycache__/
 .idea/
 .git/
 .mypy_cache/
