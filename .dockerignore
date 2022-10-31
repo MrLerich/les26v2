@@ -1,0 +1,9 @@
+venv/
+__pycashe__/
+.idea/
+.git/
+.mypy_cache/
+# comment
+*/temp*
+*/*/temp*
+
