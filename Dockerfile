@@ -4,7 +4,7 @@ ENV HOME /app_inst
 WORKDIR $HOME
 
 COPY requirements.txt .
-RUN pip install --no-cache -r requirements.txt
+RUN python3 -m pip install --no-cache -r requirements.txt
 
 COPY . .
 
