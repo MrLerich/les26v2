@@ -3,6 +3,6 @@ version: '3.3'
 services:
   web:
     build: .
-    image: from github.com/
+    image: mrlerich/v0.1.0
     ports:
       - "80:10001"
