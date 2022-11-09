@@ -5,4 +5,4 @@ services:
     build: .
     image: mrlerich/les26
     ports:
-      - "80:10001"
+      - "80:80"

@@ -6,10 +6,10 @@ from exceptions.data_exceptions import DataSourceError
 
 import config_logger
 
-
+app = Flask(__name__)
 def create_and_config_app(config_path):
     """Создание и конфиги нашего приложения"""
-    app = Flask(__name__)
+
 
     app.register_blueprint(bp_posts)
     app.register_blueprint(bp_api, url_prefix="/api")  # все что начинается api будет обрабатываться
@@ -40,4 +40,4 @@ def page_error_data_source_error(error):
 
 
 if __name__ == '__main__':
-    app.run(port=10001)
+    app.run()
