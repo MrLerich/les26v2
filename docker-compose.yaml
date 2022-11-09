@@ -3,6 +3,6 @@ version: '3.3'
 services:
   web:
     build: .
-    image: mrlerich/v0.1.0
+    image: mrlerich/les26:master-3430138255
     ports:
       - "80:10001"
